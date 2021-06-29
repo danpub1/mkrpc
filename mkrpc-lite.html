@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="mkrpc - make random passcode">
+        <meta name="author" content="">
+        <title>mkrpc - make random passcode</title>
+
+        <style>
+            body {
+                font-family: 'Fira Mono', 'Fira Code', Cousine, Consolas, 'Courier New', 'Lucida Sans Typewriter', Monaco, 'Andale Mono', Courier, monospace; 
+                font-size: 15px; 
+                text-align: left; 
+                line-height: 1.30;
+                font-variant-ligatures: none;
+            }
+            .leader { font-size: 15px; }
+            .header { font-size: 20px; }
+            .spacer { font-size: 9px; }
+            .footer { font-size: 13px; }
+            .bodydiv { margin:0 auto; width:800px; }
+            .title {  margin-bottom:0; margin-top:0 }
+            .contentdiv { margin:0 0 0 20px; font-size: 15px }
+        </style>
+        
+        <script type="text/javascript">
+function GetDiceRolls(diceCount)
+{
+    var dice = new Uint8Array(diceCount)
+    var diceGot = 0
+    while (diceGot < diceCount) {
+        var randNeeded = Math.max(1,Math.floor((diceCount-diceGot)/2.8125))
+        
+        var randBytes = new Uint8Array(randNeeded)        
+        window.crypto.getRandomValues(randBytes) // not supported by IE
+
+        for (var ii = 0; ii < randBytes.length; ii++)
+        {
+            if (randBytes[ii] < 6*6*6)
+            {
+                if (diceGot < diceCount) dice[diceGot++] = randBytes[ii]%6
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]/6)%6
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]/36)%6
+            }
+            else if (randBytes[ii] < 6*6*6+6*6)
+            {
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]-6*6*6)%6
+                if (diceGot < diceCount) dice[diceGot++] = ((randBytes[ii]-6*6*6)/6)%6
+            }
+        }
+    }
+
+    return dice
+}
+
+// my hand-picked dict2048
+var hpdict2048 = ["aardvark","abacus","abbreviation","abdomen","abhor","ability","able","abnormal","abode","abracadabra","absent","abundant","abyss","academy","accent","ace","ache","acid","acknowledge","acme","acne","acorn","acquire","acrobat","act","acupuncture","adage","add","adequate","adhesive","adieu","adjective","admiral","adobe","adrenaline","adult","adventure","adze","aerosol","aesthetic","afar","affection","afghan","aficionado","afloat","afoot","afraid","aft","agate","age","aggravate","aghast","agile","aglow","agnostic","ago","agree","aha","ahem","ahoy","aid","ailment","aim","air","aisle","ajar","akin","alarm","album","alcohol","ale","alfalfa","algae","align","alkaline","all","almond","aloe","alphabet","already","also","altar","alumni","always","amazed","amber","amen","amid","ammonia","amnesia","amount","ample","amuse","anagram","anchor","and","anew","angel","animal","ankle","annoy","anonymous","answer","ant","anvil","anxious","any","aorta","apathy","ape","aphid","apiece","aplenty","apostrophe","apple","apron","apt","aquarium","arachnid","arboretum","arc","ardent","are","argue","aria","ark","arm","aroma","arrow","arsenal","art","asbestos","ascot","ash","aside","ask","asleep","aspen","assembly","asterisk","asunder","asymmetric","ate","athlete","atlas","atmosphere","atom","atrocious","attach","atwitter","atypical","auburn","auction","audio","auger","auk","aunt","aura","austerity","auto","auxiliary","available","average","avid","avocado","award","awe","awful","awhile","awkward","awl","awning","awoke","awry","axe","axis","axle","aye","azalea","azimuth","azure","baa","baby","bacon","badge","baffle","bag","bait","bake","ball","bamboo","banana","baptize","bar","basket","bat","bauble","bawl","bay","bazaar","beach","because","bed","bee","before","beg","behind","beige","bell","bemoan","bench","bequest","beret","best","bet","beverage","beware","beyond","bias","bib","bicycle","bid","bifocals","big","bikini","bill","bimonthly","bin","biology","biped","bird","biscuit","bit","bivalve","biweekly","bizarre","blanket","bless","blimp","blob","blue","boat","bob","body","bog","boil","bolt","bone","book","border","boss","bottle","bounce","bovine","bow","box","boy","bozo","branch","bread","brick","brown","brr","brush","bubble","bucket","bud","buffalo","bug","building","bulb","bummer","bun","buoy","burn","bus","but","buy","buzz","bye","bygone","bylaw","bypass","bystander","byte","byway","cab","cactus","cadet","caffeine","cage","cahoots","cajole","cake","call","camel","can","cap","car","cash","cat","caulk","cave","caw","cayenne","cease","cedar","ceiling","cell","cement","cent","ceramic","cessation","chair","cheese","chip","chlorine","chocolate","chrome","church","cicada","cider","cigar","cilantro","cinnamon","cipher","circle","cistern","city","civilian","clam","clean","cliff","clock","club","coat","cobra","cocoa","cod","coexist","coffee","cog","coherent","coin","cold","comb","cone","cook","copy","corn","cost","cot","couch","cove","cow","coy","crab","crew","crib","crown","crux","cry","cub","cuckoo","cuddly","cue","cuff","cuisine","culture","cumin","cunning","cup","cure","cushy","cut","cyan","cycle","cygnet","cylinder","cymbal","cynic","cypress","cyst","dab","dachshund","dad","daffodil","dagger","dahlia","daisy","dalmatian","dam","dance","dappled","dart","dash","date","daub","dawn","day","dazzle","deal","debt","deck","deduct","deer","defy","degrees","dehydration","deity","dejectedly","deli","demo","den","deodorant","deposit","derby","desk","detour","deuce","devil","dew","dexterity","diary","dice","did","diet","differ","dig","dill","dim","din","diorama","dip","dirt","dish","ditch","dive","dizzy","doable","doctor","dodo","doe","doff","dog","doily","doll","dome","donkey","door","dopey","dorm","dose","dot","dough","dove","down","doze","dragon","dress","drill","drop","drum","dry","dual","dub","duck","dud","duet","duff","dug","duke","dull","dumpling","dune","duo","duplicate","duration","dust","duty","duvet","dwelling","dwindle","dye","dynamite","each","eagle","ear","easy","eat","eaves","ebb","ebony","eccentric","echo","eclipse","economy","ecstatic","eczema","edamame","eddy","edelweiss","edge","edit","education","eel","eerie","effort","egg","ego","eight","either","eject","eke","elastic","elbow","elderly","elephant","elf","elixir","elk","ellipse","elm","eloquent","else","elucidate","elves","email","ember","emerald","emit","emotion","empty","emu","enamel","encyclopedia","end","energy","enfolds","engine","enhance","enigma","enjoy","enlarge","enmity","enormous","enrich","ensign","entry","enumerate","envy","enzyme","ephemeral","epic","epoxy","equals","eraser","erect","ergo","ermine","erosion","err","ersatz","eruption","escalator","esoteric","espy","esquire","essay","estate","etch","eternity","ether","etiquette","etymology","eucalyptus","eulogy","euphemism","evaporate","eve","evidently","evolution","ewe","exam","excavator","exercise","exhaust","exit","exodus","expensive","exquisite","extra","exult","eye","fabric","face","fad","fair","fake","falcon","fame","fan","farm","fast","fat","faucet","fawn","faze","feat","febrile","fed","fee","feisty","felt","femur","fence","fern","festival","fetch","feud","fever","few","fez","fiasco","fib","fictional","fiddle","field","fife","fig","file","fin","fir","fish","fit","five","fix","fizz","fjord","flag","flea","flip","flower","fluffy","fly","foam","fob","focus","fodder","foe","fog","foil","folk","foment","font","foot","fork","fossil","fountain","fowl","fox","foyer","frame","free","friend","frog","fruit","fry","fuchsia","fudge","fuel","fugue","full","fume","fun","fur","fussy","future","fuzzy","gab","gadget","gaffe","gag","gain","gal","game","gander","gap","garden","gas","gate","gauze","gave","gawk","gaze","gear","gecko","geese","geisha","gel","gem","gene","geode","germ","gesture","get","geyser","ghastly","ghost","giant","giblets","giddy","gift","giggle","gills","gimmick","ginger","girl","gist","give","gizmo","glass","glee","glider","glove","glue","glyph","gnat","gnome","gnu","goat","goblet","goes","goggles","going","gold","gong","goo","gopher","gorilla","got","gourd","governor","gown","grass","green","grid","groom","grub","guard","guest","guffaw","guitar","gull","gum","guppy","guru","gust","guts","guy","guzzle","gym","gypsum","gyroscope","habit","hacksaw","had","haft","haggle","hair","hall","ham","hand","happy","hardy","hasty","hat","haul","haven","hawk","hay","hazy","heart","hectic","hedge","heel","hefty","heir","help","hem","hen","herd","hesitate","heuristic","hew","hexagon","hey","hiatus","hibernate","hiccup","hid","hierarchy","highway","hijack","hike","hill","him","hinge","hip","hire","hiss","hitch","hive","hoard","hobby","hockey","hodgepodge","hoedown","hog","hoist","hokey","holly","home","honey","hook","hop","horn","hose","hot","house","hover","howl","hub","huddle","hue","huffy","hug","huh","hula","hum","hunt","hurry","husband","hut","hybrid","hyena","hygiene","hymn","hyphen","hysterical","ibex","ibis","ice","icicle","icky","icon","icy","idea","idiom","idle","idol","idyllic","iffy","igloo","ignore","iguana","ilk","ill","image","imitate","immune","imp","inbox","inch","index","inertia","info","ingot","inhalers","initial","injury","ink","inlay","inmost","inn","inoculation","input","inquiry","inroad","insect","into","inundate","inventory","inward","iodine","ion","iota","irate","ire","iris","irk","iron","irrigate","isle","isotope","issue","isthmus","italic","itch","item","itinerant","itself","ivory","ivy","jabber","jacket","jade","jaguar","jail","jalopy","jam","janitor","jar","jasmine","jaunty","javelin","jaw","jay","jazz","jeans","jeer","jelly","jeopardy","jerk","jest","jet","jewel","jibes","jiffy","jig","jilted","jimmy","jinx","jitterbug","job","jock","jog","join","joke","jolly","jostle","jot","journal","jovial","jowl","joy","jubilant","judo","jug","juice","jujitsu","jukebox","julep","jump","junk","jury","just","jute","juvenile","juxtapose","kaboom","kale","kamikaze","kangaroo","kaput","karaoke","katydid","kayak","kazoo","kebab","keep","keg","kelp","kennel","kept","kernel","kettle","key","khaki","kibbutz","kick","kid","kilt","kimono","king","kiosk","kipper","kiss","kite","kiwi","klutz","knapsack","knee","knit","knot","knuckle","koala","kook","kosher","kowtow","krypton","kudos","kumquat","lab","lace","ladder","lagoons","lair","lake","lamp","land","lap","lark","laser","late","laugh","lava","law","lax","lay","lazy","leaf","lecture","ledge","leek","left","leg","lei","lemon","lens","leopard","leprechaun","less","letter","lever","lexicon","liaison","library","license","lid","lie","lifeboat","light","like","lilac","lime","line","lion","lip","liquid","list","litter","liver","lizard","llama","loaf","lob","lock","lodge","loft","log","lollipop","long","loom","lopsided","lorry","lost","lotion","loud","love","low","lox","loyal","lozenge","luau","lubricate","luck","ludicrous","luggage","lukewarm","lullaby","lump","lunch","lurk","lush","lute","luxury","lye","lying","lymph","lynx","lyre","macaroni","mad","maestro","magnet","mahogany","mail","major","make","mall","mammoth","man","map","march","mask","mat","mauve","maverick","maw","maximum","may","maze","meat","mechanic","medal","meet","megaphone","meh","melt","memo","menu","mercury","mess","met","mew","mezzanine","microwave","midst","miff","migrate","mike","milk","mime","mint","mirror","mist","mitten","mix","mnemonic","moat","mob","moccasin","model","mogul","mohair","moisture","molar","mom","money","moo","mop","morsel","moss","moth","mouse","movie","mow","mozzarella","much","mud","muff","mug","mule","mum","munch","mural","muscle","mute","muzzle","myopic","myrtle","mystery","myth","nab","nacho","nadir","nag","nail","name","nanny","nap","narrow","nasal","natty","nautical","navy","nay","neat","nebula","neck","needle","nefarious","negative","neigh","nemesis","neon","nephew","nerd","nest","net","neutral","never","news","next","niacin","nibble","nickel","niece","nifty","night","nil","nimble","ninja","nip","nirvana","nitpick","nix","noble","nocturnal","nod","noggin","noise","nominate","nonsense","noodle","nope","north","nose","note","noun","novel","now","noxious","nozzle","nuance","nub","nuclear","nudge","nugget","nuisance","nuke","null","number","nun","nuptial","nurse","nut","nuzzle","nylon","nymph","oaf","oak","oar","oasis","oats","obdurate","obey","obfuscate","obituary","object","oblige","obnoxious","oboe","obscure","obtain","obvious","ocarina","occupation","ocean","octopus","ocular","odd","ode","odious","odorous","odyssey","off","oft","ogle","ogre","oil","oink","okra","old","oleo","olfactory","olive","ombudsman","omen","omit","omnipotent","once","one","ongoing","onion","only","onomatopoeia","onrush","onshore","onto","onus","onward","onyx","oodles","oops","ooze","opal","open","ophthalmologist","opinion","opossum","opposite","opt","opus","orange","orb","orchid","order","ore","organ","origami","ornate","orthodontist","oscillate","osmosis","osprey","ostrich","other","otter","ouch","ought","ounce","our","oust","out","oval","over","owe","owing","owl","own","oxbow","oxen","oxford","oxidation","oxygen","oyster","ozone","package","pad","page","paint","pal","pamphlet","pan","paper","par","paste","patch","pause","pave","paw","pay","pea","pebble","pecan","pedal","peel","peg","pekoe","pelt","pen","people","pepper","perfume","pesky","pet","pew","pharmacy","pheasant","philodendron","phlegm","phone","phrase","physics","piano","pickle","pie","pig","pike","pillow","pimple","pin","pioneer","pipe","pique","pirate","piston","pit","pivot","pixel","pizza","plane","plenty","pliers","plop","plug","ply","pneumatic","poach","pocket","pod","poem","point","poker","pole","pomegranate","pony","pool","pop","pore","post","potato","pound","poverty","powder","pox","pray","press","price","pro","prune","pry","psalm","pseudonym","psoriasis","psyche","ptarmigan","pterodactyl","ptomaine","public","puck","pudding","pueblo","puffy","pug","puke","pull","pumpkin","punctuate","puppy","purple","push","putty","puzzle","pygmy","pylon","pyramid","python","quack","queen","quilt","quote","rabbit","raccoon","radio","raft","rag","rainbow","rake","rally","ram","ran","rap","rare","rash","rat","raucous","raven","raw","ray","razor","read","rebel","record","red","reef","reflect","regatta","rehearse","rein","rejoice","rekindle","relic","remote","rend","reopen","reptile","request","rest","retina","reuse","revenue","reward","rhapsody","rhetoric","rhino","rhombus","rhubarb","rhythm","rib","rice","riddle","rift","rig","rile","rim","ring","riot","rip","rise","ritual","river","road","robot","rock","rod","roe","rogue","roil","roll","romantic","root","rope","rose","rotten","round","rover","row","royal","ruby","ruckus","rudder","rue","ruffles","rug","ruins","ruler","rumpled","run","rupture","rural","rust","rut","rye","sable","sack","saddle","safe","saguaro","sail","sake","salt","same","sand","sap","sardine","sash","sat","sauce","save","saw","saxophone","say","scarf","scent","school","scissors","scorpion","scroll","sculpture","scythe","sea","second","sedan","see","segment","seismic","self","semaphore","send","separate","sequoia","serve","sesame","set","seven","sew","sextant","shark","sheep","ship","shop","shrimp","shut","shy","sibling","sickle","side","siesta","sift","sign","silk","simple","sink","sip","sire","sister","sit","six","sizzle","skate","sketch","ski","skunk","sky","slam","sled","slime","slow","sludge","sly","small","smell","smile","smoke","smug","snake","sneeze","sniff","snow","snug","soap","sob","sock","sod","sofa","soggy","soil","solid","some","son","soon","sop","sort","soup","sovereign","sow","soy","spark","spear","sphere","spice","splash","spot","spring","spud","spy","square","star","stem","stir","storm","string","stump","style","suave","sub","suck","suds","sue","suffix","sugar","suit","sulk","sum","sun","sup","surf","suspend","suture","svelte","swamp","sweat","swing","sword","swum","sybaritic","sycamore","sylvan","symphony","synergy","syrup","system","table","tack","tadpole","taffy","tag","tail","take","tall","tame","tank","tape","tarantula","taste","tattoo","taut","tavern","tawny","tax","tea","technology","tedious","tee","telephone","temperature","tennis","tepid","tequila","termite","test","tetanus","text","thanks","the","thin","thorn","thread","thumb","thwart","thyme","tiara","tibia","tickle","tidy","tie","tiff","tiger","tile","time","tin","tip","tire","tissue","title","tizzy","toast","tobacco","today","toe","toffee","toga","toilet","token","toll","tomato","tongs","tooth","top","torch","toss","tot","touch","tower","toxin","toy","train","tree","triangle","trophy","trumpet","try","tsunami","tub","tuck","tuft","tug","tuition","tulip","tummy","tune","turf","tusk","tutor","tuxedo","twang","tweet","twig","two","tycoon","tying","tyke","type","tyrant","ubiquitous","udder","ugh","ugly","ukulele","ulcer","ulna","ultimate","ululate","umbrella","umlaut","umpire","unanimous","unbelievable","uncle","undo","unearth","unfurl","ungrateful","unhappy","unicorn","unkempt","unlock","unmanned","unofficial","unplug","unravel","unscrew","untruth","unused","unveil","unwrap","unyielding","unzip","upbeat","update","upend","upfront","upgrade","upholstery","upkeep","uplifting","upmarket","upon","uppercase","upright","upset","uptight","upwards","uranium","urban","urchin","urge","urn","usage","use","usher","using","usual","utensil","utility","utmost","utopia","utter","uvula","vacuum","vagabond","vain","valley","vampire","van","vapor","varmint","vase","vat","vault","veal","vector","veer","vegetable","vehicle","vein","velvet","vent","verb","vessel","vet","vex","vial","vibrations","victor","video","view","vigil","villa","vim","vine","violin","viper","virus","vise","vitamin","vivid","vixen","vocal","vodka","vogue","voice","volcano","vomit","voodoo","vortex","vote","vouch","vow","voyage","vulture","vying","wacky","wad","waffle","wage","wait","wake","wallet","wand","warm","wash","water","wave","wax","way","wealth","web","wed","weed","weft","weight","well","went","wept","were","west","wet","whale","wheel","white","who","why","wick","wide","wife","wig","willow","wimp","wine","wipe","wire","wise","wit","wives","wizard","wobbly","woe","wok","wolf","woman","won","wood","worm","wound","woven","wow","wrap","wrench","wrist","wrong","wrung","wry","wuss","xenon","xylophone","yacht","yahoo","yak","yam","yank","yap","yarn","yawn","year","yellow","yen","yeoman","yes","yeti","yew","yield","yip","yodel","yoga","yoke","yolk","yonder","yore","you","yowl","yuck","yuk","yuletide","yum","zany","zap","zeal","zebra","zenith","zeppelin","zero","zest","zigzag","zilch","zing","zip","zircon","zither","zodiac","zombie","zone","zoo","zucchini","zygote"];
+
+function InitialCap(word) {
+    return word.substr(0,1).toUpperCase() + word.substr(1)
+}
+
+function GetWords(wordCount, dict) 
+{
+    var out = ""
+    var dice;
+    
+    for (var ii = 0; ii < wordCount; ii++)
+    {
+        dice = GetDiceRolls(6); // enough for largest dictionary 23328
+        
+        var word = dice[0] + dice[1]*6 + dice[2]*6*6 + dice[3]*6*6*6 + dice[4]*6*6*6*6 + dice[5]*6*6*6*6*6;
+        
+        var maxVal = Math.floor(6*6*6*6*6*6 / dict.length) * dict.length;
+        word = word <= maxVal ? word % dict.length : word;
+        
+        if (word < dict.length) {
+           if (out === "") out = dict[word]
+           else if ((wordCount == 4 && ii == 2) || (wordCount == 5 && ii == 2) || (wordCount == 6 && ii == 3) ||
+                    (wordCount == 7 && ii == 3) || (wordCount == 8 && ii == 4) || (wordCount == 9 && (ii == 3 || ii == 5)) || 
+                    (wordCount == 10 && (ii == 3 || ii == 6)) || (wordCount == 11 && (ii == 4 || ii == 7)) ||
+                    (wordCount == 12 && (ii == 4 || ii == 8)) ||
+                    (wordCount > 12 && (ii % 7 === 0 || ii % 7 === 3) && ii > 0)
+                   )
+                    out = out + " - " + dict[word]
+           else out = out + " " + dict[word]
+        } else {
+           ii--; 
+        }
+    }
+    
+    return out
+}
+
+function suppress(trigraph) {
+   trigraph = trigraph.toLowerCase()
+   if (trigraph.startsWith('ww')) return true;
+   if (trigraph.startsWith('yy')) return true;
+   if (trigraph.endsWith('ww')) return true;
+   if (trigraph.endsWith('yy')) return true;
+   salty = "titsexsekfagfukfuxkokkoxnigkykkikjappissuksuxdykdikcumkumnipgypliklixwopbumjiz";
+   for (ii = 0; ii < salty.length; ii += 3) {
+      if (trigraph === salty.substr(ii,3)) {
+          //console.log("Suppressing " + trigraph)
+          return true;
+      }
+   }
+   return false;
+}
+
+function getCVCRunes(desiredLen) {
+    var runes = "";
+    
+    for (var jj = 0; jj < 7; jj++) {
+        for (var ii = 0; ii < 18; ii++) {
+          for (var kk = 0; kk < 15; kk++) {
+             trigraph = "bdfghjklmnprstvwyz".substr(ii,1) + "aeiouyw".substr(jj,1) + "bdfgklmnprstvxz".substr(kk,1)
+             if (!suppress(trigraph)) runes += trigraph
+          }
+       }
+    }
+    
+    runes = runes.substr(0, desiredLen*3)
+    if (runes.length < desiredLen*3) return "bad";
+
+    return runes;
+}
+
+function GetThreeLetters(letterCount) {
+    var out = "";
+    var dice;
+    var val = 0;
+    var orgLetterCount = letterCount
+
+    var ll = 1296; 
+    var runes = getCVCRunes(ll);
+    while (letterCount >= 3) {
+        val = GetAny(ll);
+        out = out + runes.substr(val*3,3)
+        letterCount -= 3
+    }
+    
+    return out
+}
+
+function GetAny(any)
+{
+    var diceCount = Math.log(any) / Math.log(6)
+    if (diceCount != Math.ceil(diceCount)) {
+        diceCount = Math.ceil(diceCount) + 1
+    }
+    var val = any
+    while (val >= any) {
+        dice = GetDiceRolls(diceCount);
+        val = 0
+        var maxVal = 0
+        for (ii = 0; ii < diceCount; ii++) {
+            val = val*6 + dice[ii]
+            maxVal = maxVal*6 + 5
+        }
+        
+        maxVal = Math.floor((maxVal + 1) / any) * any;
+        val = val <= maxVal ? val % any : any;
+    }
+    
+    //console.log("val = " + val)
+    
+    return val
+}
+
+function GetBase32Digits(numDigits, runes)
+{
+    var out = ""
+    var val = 0
+    var dice;
+    
+    if (numDigits > 0) {
+       dice = GetDiceRolls(numDigits*5)
+       for (var ii = 0; ii < numDigits*5; ii += 5) {
+           val = dice[ii+0]*(1)+dice[ii+1]*(6)+dice[ii+2]*(6*6)+dice[ii+3]*(6*6*6)+dice[ii+4]*(6*6*6*6);
+           out = out + runes.substr(val%32,1)
+       }
+    }
+    
+    return out
+}
+
+function Refresh() {
+    var html = ""
+
+    var dict = hpdict2048;
+
+    // Missing G (6, 8), S (5), U (v), Y (4).  Watch for 0 and o, 2 and z
+    var base32runes = "0123456789aBcdeFHijkLmnopQRtvwxz";
+    var perDict = { exampleLength: 7, startLength: 5, endLength: 12, numLetters: 3 };
+
+    ii = 5;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    ii = 7;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    ii = 9;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    var numWords = perDict.exampleLength;
+    var example = GetWords(numWords, dict)
+    var words = example.split(" ");
+    var numletters = perDict.numLetters;
+    var shortExample = InitialCap(words[0].substr(0,numletters)) 
+    for (ii = 1; ii < words.length; ii++) {
+        shortExample += words[ii].substr(0,numletters)
+    }
+
+    example += " &gt;&gt;&gt; " + shortExample
+    window.document.getElementById("mkrpc-example").innerHTML = example;
+
+    var sep = '-'
+    window.document.getElementById("mkrpc-content").innerHTML = html;
+
+    html = ""
+    ii = 12;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
+    ii = 16;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
+    ii = 20;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits)<br />";
+        window.document.getElementById("mkrpc-base32").innerHTML = html;
+
+    html = ""
+    ii = 5;
+    strength = Math.log(1296) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": &nbsp;" + GetThreeLetters(6) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+    ii = 7;
+    strength = Math.log(1296) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": &nbsp;" + GetThreeLetters(6) + sep + GetThreeLetters(9) + sep + GetThreeLetters(6) + " (" + strength + " bits)<br />"
+    ii = 9;
+    strength = Math.log(1296) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": &nbsp;" + GetThreeLetters(9) + sep + GetThreeLetters(9) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+    window.document.getElementById("mkrpc-3letters").innerHTML = html;
+}
+        </script>
+    </head>
+
+    <body>
+        <div class="bodydiv" id="bodydiv">
+            <h2 class="title">mkrpc: Make Random Passcode</h2>
+            <div class="spacer">&nbsp;</div>
+            <div><b><i class="header">Word-based Passcode</i></b>
+            <div class="spacer">&nbsp;</div>
+            <div id="mkrpc-content" class="contentdiv">(Please enable JavaScript)</div>
+            <div class="spacer">&nbsp;</div>
+            <div>
+                <b><i class="leader">How long?</i></b>
+                Use 5 words for a passcode used on a closed network,
+                7 words for one used out on the Internet, 
+                9 words for protecting an encrypted document or archive, 
+                or a couple words for a PIN, random email, or username.
+                <div class="spacer">&nbsp;</div>
+                <b><i class="leader">To use:</i></b>
+                Type the first 3 letters of each word.  
+                If needed to meet the passcode security rules, uppercase the first letter and type the hyphen(s).
+                <div class="spacer">&nbsp;</div>
+                <b><i class="leader">Example:</i></b> <span id="mkrpc-example">(Please enable JavaScript)</span>
+            </div>
+            <div class="spacer">&nbsp;</div>
+            <div class="spacer">&nbsp;</div>
+            <div><b><i class="header">CVC Passcode</i></b>
+            <div class="spacer">&nbsp;</div>
+            The CVC (consonant-vowel-consonant) pattern works well for a Wi-Fi password because 
+            it's easy to share with someone.  Use 5, 7, or 9 CVC's depending on how publicly visible
+            the Wi-Fi network is. 
+            <div class="spacer">&nbsp;</div>
+            <div class="contentdiv">
+                <span id="mkrpc-3letters">(Please enable JavaScript)</span><br>
+            </div>
+            <div><b><i class="header">Base-32 Passcode</i></b>
+            <div class="spacer">&nbsp;</div>
+            Base-32 is for passcodes required to be 20 characters or less.
+            It's shorter, but harder to remember.
+            Use 12 characters on a closed network, 16 on the internet, or 20 for an encrypted document or archive. 
+            It may be typed in lowercase; it's shown using both upper- and lowercase characters to make it less ambiguous to write down, 
+            especially if the zero and uppercase Z are written with slashes.
+            <div class="spacer">&nbsp;</div>
+            Base-32 uses characters from this set: [0123456789aBcdeF,HijkLmnopQR,t,vwx,z]. 
+            </div>
+            <div class="spacer">&nbsp;</div>
+            <div class="contentdiv">
+                <span id="mkrpc-base32">(Please enable JavaScript)</span><br />
+            </div>
+            <div class="spacer">&nbsp;</div>
+            <div class="footer">&copy; 2021 danpub1</div>
+            <div class="footer">Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2019.10.06, &copy; 2000-2019 Kevin Atkinson et al</div>
+        </div>
+        <script type="text/javascript">Refresh()</script>
+    </body>
+</html>
