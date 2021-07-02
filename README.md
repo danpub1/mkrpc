@@ -8,16 +8,16 @@ All of these solutions are for passcodes which need to be typed occasionally and
 
 The wordlist based passcode generator uses a relatively short list of words, only 2048.
 Longer lists end up having more obscure words, making them harder to remember.
-These were chosen
-1. to be unique in the first three characters, resulting in less typing (and less typing mistakes)
-1. to be concrete rather than abstract, and hopefully more memorable
-2. to be common
-3. to be short
+These were chosen to be:
+1. Unique in the first three characters, resulting in less typing (and less typing mistakes)
+1. Concrete rather than abstract, and hopefully more memorable
+2. Common
+3. Short
 
 The CVC-based passcode generator uses an even shorter list of CVC syllables, just 1296.
 (1296 is the number of outcomes from rolling 4 dice.)
 There are many more pronounceable 3-letter combinations, so a strong password could be made shorter.
-But simplicity won out over length.
+But simplicity won out over shortness.
 
 The base-32 generator uses an alphabet chosen to be written down.
 (My handwriting is not neat enough for base-64.)
