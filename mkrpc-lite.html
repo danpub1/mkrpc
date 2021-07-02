@@ -183,6 +183,8 @@ function Refresh() {
     strength = Math.floor(strength)
     html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
 
+    window.document.getElementById("mkrpc-content").innerHTML = html;
+
     var numWords = perDict.exampleLength;
     var example = GetWords(numWords, dict)
     var words = example.split(" ");
@@ -196,7 +198,6 @@ function Refresh() {
     window.document.getElementById("mkrpc-example").innerHTML = example;
 
     var sep = '-'
-    window.document.getElementById("mkrpc-content").innerHTML = html;
 
     html = ""
     ii = 12;
@@ -208,18 +209,19 @@ function Refresh() {
         window.document.getElementById("mkrpc-base32").innerHTML = html;
 
     html = ""
-    ii = 5;
+    ii = 6;
     strength = Math.log(1296) / Math.log(2) * ii
     strength = Math.floor(strength)
-    html = html + ii + ": &nbsp;" + GetThreeLetters(6) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
-    ii = 7;
+    html = html + ii + ": &nbsp;&nbsp;" + GetThreeLetters(9) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+    ii = 8;
     strength = Math.log(1296) / Math.log(2) * ii
     strength = Math.floor(strength)
-    html = html + ii + ": &nbsp;" + GetThreeLetters(6) + sep + GetThreeLetters(9) + sep + GetThreeLetters(6) + " (" + strength + " bits)<br />"
-    ii = 9;
+    html = html + ii + ": &nbsp;&nbsp;" + GetThreeLetters(9) + sep + GetThreeLetters(6) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+    ii = 10;
     strength = Math.log(1296) / Math.log(2) * ii
     strength = Math.floor(strength)
-    html = html + ii + ": &nbsp;" + GetThreeLetters(9) + sep + GetThreeLetters(9) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+    html = html + ii + ": &nbsp;" + GetThreeLetters(9) + sep + GetThreeLetters(6) + sep + GetThreeLetters(6) + sep + GetThreeLetters(9) + " (" + strength + " bits)<br />"
+
     window.document.getElementById("mkrpc-3letters").innerHTML = html;
 }
         </script>
@@ -242,7 +244,7 @@ function Refresh() {
                 <div class="spacer">&nbsp;</div>
                 <b><i class="leader">To use:</i></b>
                 Type the first 3 letters of each word.  
-                If needed to meet the passcode security rules, uppercase the first letter and type the hyphen(s).
+                If needed to meet passcode security rules, uppercase the first letter and type the hyphen(s).
                 <div class="spacer">&nbsp;</div>
                 <b><i class="leader">Example:</i></b> <span id="mkrpc-example">(Please enable JavaScript)</span>
             </div>
@@ -251,8 +253,8 @@ function Refresh() {
             <div><b><i class="header">CVC Passcode</i></b>
             <div class="spacer">&nbsp;</div>
             The CVC (consonant-vowel-consonant) pattern works well for a Wi-Fi password because 
-            it's easy to share with someone.  It's also pronounceable, so it may be easier to remember.
-            Use 5, 7, or 9 CVC's depending on how publicly visible
+            it's easy to share with someone.  It's also pronounceable, to aid in remembering.
+            Use 6, 8, or 10 CVC's depending on how publicly visible
             the Wi-Fi network is. 
             <div class="spacer">&nbsp;</div>
             <div class="contentdiv">
