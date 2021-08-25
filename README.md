@@ -1,4 +1,4 @@
-# mkrpc
+# mkrpc - make random passcode
 https://danpub1.github.io/mkrpc/mkrpc-lite.html
 
 This represents a number of years of trying various other solutions, and accepting these as a reasonable compromise.
