@@ -5,22 +5,13 @@
         <meta name="description" content="mkrpc - make random passcode">
         <meta name="author" content="">
         <title>mkrpc - make random passcode</title>
-
+        <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAArSURBVCjPY2CgFviPBHEoQFZKQAEDNiX/0Vj/8VuBxS3/8Zg5lBRgQioBAHb3KtYfBvSUAAAAAElFTkSuQmCC">
         <style>
-            body {
-                font-family: 'Fira Mono', 'Fira Code', Cousine, Consolas, 'Courier New', 'Lucida Sans Typewriter', Monaco, 'Andale Mono', Courier, monospace; 
-                font-size: 15px; 
-                text-align: left; 
-                line-height: 1.30;
-                font-variant-ligatures: none;
-            }
-            .leader { font-size: 15px; }
-            .header { font-size: 20px; }
-            .spacer { font-size: 9px; }
-            .footer { font-size: 13px; }
-            .bodydiv { margin:0 auto; width:800px; }
-            .title {  margin-bottom:0; margin-top:0 }
-            .contentdiv { margin:0 0 0 20px; font-size: 15px }
+        th{font-weight:unset;text-align:unset}@media print{html{background-color:#FFF !important}a,a:visited{text-decoration:underline}p,img{page-break-inside:avoid !important;break-inside:avoid !important}}html{background-color:#f4f4f4}body{background-color:#FFF;color:#000}strong{color:#000}h1,h2,h3,h4,h5,h6{color:#000}blockquote{border-left-color:#f4f4f4}hr,.vscode-dark hr,.vscode-light hr{border-color:#f4f4f4}h1,.vscode-dark h1,.vscode-light h1,h2,.vscode-dark h2,.vscode-light h2{border-bottom-color:#f4f4f4}html{font-size:16px}body{font-family:'Merriweather','Georgia','Times New Roman',serif;font-weight:300;word-spacing:.1em;letter-spacing:0;line-height:150%}body strong{font-weight:700}pre,code{font-family:'Fira Code','Fira Mono','Courier New',monospace;line-height:133%;font-weight:700;word-spacing:0;letter-spacing:0;line-height:inherit}h1,h2,h3,h4,h5,h6{font-family:'Fira Sans','Trebuchet MS','Arial Black','Arial','Helvetica',sans-serif;font-weight:inherit;word-spacing:0;letter-spacing:0;line-height:110%}h1,h2,h3,h4,h5,h6{font-weight:300}h1 strong,h2 strong,h3 strong,h4 strong,h5 strong,h6 strong{font-weight:700}p{font-size:1rem}h1{font-size:2.618rem}h2{font-size:2.058rem}h3{font-size:1.618rem}h4{font-size:1.272rem}h5{font-size:1.000rem}h6{font-size:.786rem}h1>code{font-size:2.058rem}h2>code{font-size:1.618rem}h3>code{font-size:1.272rem}h4>code{font-size:1rem}h5>code{font-size:.786rem}h6>code{font-size:.618rem}html{max-width:100%}body{max-width:64rem;margin:0 auto;padding:1rem 1rem 1rem 1rem;word-wrap:break-word}table{width:100%}p,h1,h2,h3,h4,h5,h6,blockquote,pre,table,ol,ul{margin:1.272rem 0 0 0}li>ul,li>ol{margin-top:0}hr{margin:0}body>*:first-child,body>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child{margin-top:0}blockquote>*:last-child{margin-bottom:1.272rem}blockquote>*:first-child{margin-top:1.272rem}blockquote{border-left-width:8px;border-left-style:solid;padding:0 1.272rem 0 1.272rem}hr,.vscode-dark hr,.vscode-light hr{height:0;border-width:1px;border-style:solid}h1,h2{border-bottom-width:2px;border-bottom-style:solid}h1{margin-top:2.618rem}h2{margin-top:2.058rem}h3{margin-top:1.618rem}h4{margin-top:1.272rem}h5{margin-top:1.272rem}h6{margin-top:1.272rem}img{display:block;max-width:100%;margin-left:auto;margin-right:auto;page-break-inside:avoid !important;break-inside:avoid !important}
+        .contentdiv { margin-left: 2.5em; margin-top: 0.861rem; }
+        .example, .contentdiv { font-family: monospace; font-size: 14px; }
+        .footer p { font-size: 12px; }
+        p { margin-top: 0.786rem; }
         </style>
         
         <script type="text/javascript">
@@ -165,7 +156,9 @@ function Refresh() {
     var dict = hpdict2048;
 
     // Missing G (6, 8), S (5), U (v), Y (4).  Watch for 0 and o, 2 and z
-    var base32runes = "0123456789aBcdeFHijkLmnopQRtvwxz";
+    // Uppercase chosen to avoid ambiguity: B(6), F(t), H(n), L(1,I), Q(9), R(n)
+    // Uppercase chosen to distribute upper & lower evenly: CPVWX (all have similar shapes upper vs lower)
+    var base32runes = "0123456789aBCdeFHijkLmnoPQRtVWXz";
     var perDict = { exampleLength: 7, startLength: 5, endLength: 12, numLetters: 3 };
 
     ii = 5;
@@ -205,7 +198,7 @@ function Refresh() {
     ii = 16;
     html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
     ii = 20;
-    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits)<br />";
+    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits)";
         window.document.getElementById("mkrpc-base32").innerHTML = html;
 
     html = ""
@@ -228,56 +221,40 @@ function Refresh() {
     </head>
 
     <body>
-        <div class="bodydiv" id="bodydiv">
-            <h2 class="title">mkrpc: Make Random Passcode</h2>
-            <div class="spacer">&nbsp;</div>
-            <div><b><i class="header">Word-based Passcode</i></b>
-            <div class="spacer">&nbsp;</div>
-            <div id="mkrpc-content" class="contentdiv">(Please enable JavaScript)</div>
-            <div class="spacer">&nbsp;</div>
-            <div>
-                <b><i class="leader">How long?</i></b>
-                Use 5 words for a passcode used on a closed network,
-                7 words for one used out on the Internet, 
-                9 words for protecting an encrypted document or archive, 
-                or a couple words for a PIN, random email, or username.
-                <div class="spacer">&nbsp;</div>
-                <b><i class="leader">To use:</i></b>
-                Type the first 3 letters of each word.  
-                If needed to meet passcode security rules, uppercase the first letter and type the hyphen(s).
-                <div class="spacer">&nbsp;</div>
-                <b><i class="leader">Example:</i></b> <span id="mkrpc-example">(Please enable JavaScript)</span>
-            </div>
-            <div class="spacer">&nbsp;</div>
-            <div class="spacer">&nbsp;</div>
-            <div><b><i class="header">CVC Passcode</i></b>
-            <div class="spacer">&nbsp;</div>
-            The CVC (consonant-vowel-consonant) pattern works well for a Wi-Fi password because 
-            it's easy to share with someone.  It's also pronounceable, to aid in remembering.
-            Use 6, 8, or 10 CVC's depending on how publicly visible
-            the Wi-Fi network is. 
-            <div class="spacer">&nbsp;</div>
-            <div class="contentdiv">
-                <span id="mkrpc-3letters">(Please enable JavaScript)</span><br>
-            </div>
-            <div><b><i class="header">Base-32 Passcode</i></b>
-            <div class="spacer">&nbsp;</div>
-            Use Base-32 for passcodes required to be 20 characters or less.
-            It's shorter, but harder to remember.
-            Use 12 characters on a closed network, 16 on the internet, or 20 for an encrypted document or archive. 
-            It may be typed in lowercase; it's shown using both upper- and lowercase characters to make it less ambiguous to write down, 
-            especially if the zero and lowercase Z are written with slashes.
-            <div class="spacer">&nbsp;</div>
-            Base-32 uses characters from this set: [0123456789aBcdeF,HijkLmnopQR,t,vwx,z]. 
-            </div>
-            <div class="spacer">&nbsp;</div>
-            <div class="contentdiv">
-                <span id="mkrpc-base32">(Please enable JavaScript)</span><br />
-            </div>
-            <div class="spacer">&nbsp;</div>
-            <div class="footer">&copy; 2021 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a></div>
-            <div class="footer">Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2019.10.06, &copy; 2000-2019 Kevin Atkinson et al</div>
+        <h2 class="title">mkrpc: Make Random Passcode</h2>
+        <h4><b><i class="header">Word-Based Passcode</i></b></h4>
+        <div id="mkrpc-content" class="contentdiv">(Please enable JavaScript)</div>
+        <p><b><i>How long?</i></b>
+        Use 5 words for a passcode used on a closed network,
+        7 words for one used out on the Internet, 
+        9 words for protecting an encrypted document or archive, 
+        or a couple words for a PIN, random email, or username.</p>
+        <p><b><i>To use:</i></b>
+        Type the first 3 letters of each word.  
+        If needed to meet passcode security rules, uppercase the first letter and type the hyphen(s).</p>
+        <p><b><i>Example:</i></b> <span class="example" id="mkrpc-example">(Please enable JavaScript)</span></p>
+        <h4><b><i>Consonant-Vowel-Consonant Passcode</i></b></h4>
+        <div class="contentdiv">
+            <span id="mkrpc-3letters">(Please enable JavaScript)</span>
         </div>
+        <p>This pattern works well for a Wi-Fi passcode because 
+        it's easy to share with someone.  It's also pronounceable, to aid in remembering.
+        Use 6, 8, or 10 CVC syllables depending on how publicly visible
+        the Wi-Fi network is.</p> 
+        <h4><b><i class="header">Base-32 Passcode</i></b></h4>
+        <div class="contentdiv">
+            <span id="mkrpc-base32">(Please enable JavaScript)</span><br />
+        </div>
+        <p>Use Base-32 for a passcode required to be 20 characters or less.
+        It's shorter, but harder to remember.</p>
+        <p><b><i>How long?</i></b>
+        Use 12 characters on a closed network, 16 on the internet, or 20 for an encrypted document or archive.</p> 
+        <p><b><i>To use:</i></b>
+        It may be typed in lowercase and without hyphens; it's shown using both upper- and lowercase characters to make it less ambiguous to write down, 
+        especially if the zero and lowercase Z are written with slashes.
+        Or type it in mixed case to meet passcode security rules if needed. The lowercase letters are all the vowels, plus the consonants in "doze mint joke".</p>
+        <p>Base-32 uses characters from this set: <span class="example">[0123456789aBCdeF,HijkLmnoPQR,t,VWX,z]</span>.</p>
+        <div class="footer"><p>&copy; 2022 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a>. Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2019.10.06, &copy; 2000-2019 Kevin Atkinson et al</div></p>
         <script type="text/javascript">Refresh()</script>
     </body>
 </html>
