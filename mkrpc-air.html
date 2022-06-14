@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="mkrpc - make random passcode">
+        <meta name="author" content="">
+        <title>mkrpc - make random passcode</title>
+        <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABUUlEQVQ4y62SPUuCYRSGr/P6mqB9goFgS2VgTW0tQRFEcw3NQTgI5et/aGoJtUGoqJ/QEi1BCEFDg7S1KA0uRkgRlh+Zp8VXFCoVu5cHzsN9Peec54Y+JT8VY/FEAAgBi4AJpIHjqBVJdwTE4ok54AyYBG6BKrDQOENRK5L6FRBPHJqqegSsAtsicg3UVXUeOAUKIqxbkcib7TFbAao6DiwB52IYV9bujjau0rF44gTYU2UKuLc9RvtA4gYGEbItZluPjQdHWovNDjJJX/CpdrH5zKzbzctyan/G9A8VEVHyRQ+fxk3wVf3OMcltZJK+UiCcv2vuIJP0DTsccu40WSlXtJvfewDWAuF8zh7B4xpwTJujXgyRbgATgLd9ByIgRs9BMvpNovFXInsBaL+AWr1WK+lHEe0OVQUqzRyISKFc1QOq71uAq4P5C7gUkSz/oW9fR2UNz6Fl9gAAAABJRU5ErkJggg==">
+        <style>
+        th{font-weight:unset;text-align:unset}@media print{html{background-color:#FFF !important}a,a:visited{text-decoration:underline}p,img{page-break-inside:avoid !important;break-inside:avoid !important}}html{background-color:#f4f4f4}body{background-color:#FFF;color:#000}strong{color:#000}h1,h2,h3,h4,h5,h6{color:#000}blockquote{border-left-color:#f4f4f4}hr,.vscode-dark hr,.vscode-light hr{border-color:#f4f4f4}h1,.vscode-dark h1,.vscode-light h1,h2,.vscode-dark h2,.vscode-light h2{border-bottom-color:#f4f4f4}html{font-size:16px}body{font-family:'Merriweather','Georgia','Times New Roman',serif;font-weight:300;word-spacing:.1em;letter-spacing:0;line-height:150%}body strong{font-weight:700}pre,code{font-family:'Fira Code','Fira Mono','Courier New',monospace;line-height:133%;font-weight:700;word-spacing:0;letter-spacing:0;line-height:inherit}h1,h2,h3,h4,h5,h6{font-family:'Fira Sans','Trebuchet MS','Arial Black','Arial','Helvetica',sans-serif;font-weight:inherit;word-spacing:0;letter-spacing:0;line-height:110%}h1,h2,h3,h4,h5,h6{font-weight:300}h1 strong,h2 strong,h3 strong,h4 strong,h5 strong,h6 strong{font-weight:700}p{font-size:1rem}h1{font-size:2.618rem}h2{font-size:2.058rem}h3{font-size:1.618rem}h4{font-size:1.272rem}h5{font-size:1.000rem}h6{font-size:.786rem}h1>code{font-size:2.058rem}h2>code{font-size:1.618rem}h3>code{font-size:1.272rem}h4>code{font-size:1rem}h5>code{font-size:.786rem}h6>code{font-size:.618rem}html{max-width:100%}body{max-width:64rem;margin:0 auto;padding:1rem 1rem 1rem 1rem;word-wrap:break-word}table{width:100%}p,h1,h2,h3,h4,h5,h6,blockquote,pre,table,ol,ul{margin:1.272rem 0 0 0}li>ul,li>ol{margin-top:0}hr{margin:0}body>*:first-child,body>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child,body>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child>*:first-child{margin-top:0}blockquote>*:last-child{margin-bottom:1.272rem}blockquote>*:first-child{margin-top:1.272rem}blockquote{border-left-width:8px;border-left-style:solid;padding:0 1.272rem 0 1.272rem}hr,.vscode-dark hr,.vscode-light hr{height:0;border-width:1px;border-style:solid}h1,h2{border-bottom-width:2px;border-bottom-style:solid}h1{margin-top:2.618rem}h2{margin-top:2.058rem}h3{margin-top:1.618rem}h4{margin-top:1.272rem}h5{margin-top:1.272rem}h6{margin-top:1.272rem}img{display:block;max-width:100%;margin-left:auto;margin-right:auto;page-break-inside:avoid !important;break-inside:avoid !important}
+        .contentdiv { margin-left: 2.5em; margin-top: 0.861rem; }
+        .example, .contentdiv { font-family: monospace; font-size: 14px; }
+        .footer p { font-size: 12px; }
+        p { margin-top: 0.786rem; }
+        </style>
+        
+        <script type="text/javascript">
+function GetDiceRolls(diceCount)
+{
+    var dice = new Uint8Array(diceCount)
+    var diceGot = 0
+    while (diceGot < diceCount) {
+        var randNeeded = Math.max(1,Math.floor((diceCount-diceGot)/2.8125))
+        
+        var randBytes = new Uint8Array(randNeeded)        
+        window.crypto.getRandomValues(randBytes) // not supported by IE
+
+        for (var ii = 0; ii < randBytes.length; ii++)
+        {
+            if (randBytes[ii] < 6*6*6)
+            {
+                if (diceGot < diceCount) dice[diceGot++] = randBytes[ii]%6
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]/6)%6
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]/36)%6
+            }
+            else if (randBytes[ii] < 6*6*6+6*6)
+            {
+                if (diceGot < diceCount) dice[diceGot++] = (randBytes[ii]-6*6*6)%6
+                if (diceGot < diceCount) dice[diceGot++] = ((randBytes[ii]-6*6*6)/6)%6
+            }
+        }
+    }
+
+    return dice
+}
+
+// my hand-picked dict2048
+var hpdict2048 = ["abet","able","ably","aced","aces","ache","achy","acid","acne","acre","acts","adds","afar","agar","aged","ages","ague","ahoy","aide","aids","ails","aims","airs","airy","ajar","akin","alas","ales","alga","ally","alms","aloe","also","alto","amen","amid","ammo","amok","amps","anew","anon","ante","anti","ants","aped","apes","apex","aqua","arch","arcs","area","ares","aria","arid","arks","arms","army","arts","arty","asks","asps","atom","atop","aunt","aura","auto","aver","avid","avow","away","awed","awes","awls","awry","axed","axes","axis","axle","ayes","baas","babe","baby","back","bade","bags","bail","bait","bake","bald","bale","ball","balm","band","bane","bang","bank","bans","barb","bard","bare","barf","bark","barn","bars","base","bash","bask","bass","bate","bath","bats","bawl","bays","bead","beak","beam","bean","bear","beat","beau","beds","beef","been","beep","beer","bees","beet","begs","bell","belt","bend","bent","berm","best","beta","bets","bevy","bias","bibs","bide","bids","bike","bile","bill","bind","bins","bird","bite","bits","blab","blah","bled","blew","blip","blob","bloc","blot","blow","blue","blur","boar","boas","boat","bobs","bode","body","bogs","boil","bold","bole","bolt","bomb","bond","bone","bony","book","boom","boon","boor","boos","boot","bops","bore","born","bosh","boss","both","bout","bowl","bows","boys","bozo","brad","brag","bran","bras","brat","bray","bred","brew","brim","brow","buck","buds","buff","bugs","bulb","bulk","bull","bump","bums","bung","bunk","buns","buoy","burg","burn","burp","burr","bury","bush","buss","bust","busy","buts","butt","buys","buzz","byes","byte","cabs","cads","cage","cake","calf","call","calm","came","camp","cams","cane","cans","cant","cape","caps","card","care","carp","cars","cart","case","cash","cask","cast","cats","cave","caws","cede","cell","cent","chap","char","chat","chef","chew","chic","chin","chip","chit","chop","chow","chug","chum","cite","city","clad","clam","clan","clap","claw","clay","clef","clip","clod","clog","clot","cloy","club","clue","coal","coat","coax","cobs","cock","code","cods","coed","cogs","coil","coin","coke","cola","cold","colt","coma","comb","come","cone","conk","cons","cook","cool","coop","coos","cope","cops","copy","cord","core","cork","corm","corn","cost","cots","coup","cove","cowl","cows","crab","crag","cram","craw","crew","crib","crop","crow","crud","crux","cube","cubs","cuds","cued","cues","cuff","cull","cult","cups","curb","curd","cure","curl","curs","curt","cusp","cuss","cute","cuts","cyst","dabs","dado","dads","daft","dais","dale","dame","damn","damp","dams","dank","dare","dark","darn","dart","dash","data","date","daub","dawn","days","daze","dead","deaf","deal","dean","dear","debs","debt","deck","deed","deem","deep","deer","deft","defy","deli","demo","dens","dent","deny","desk","dial","dice","died","dies","diet","digs","dill","dime","dims","dine","dins","dips","dire","dirt","disc","dish","disk","dive","dock","dodo","doer","does","doff","dogs","dole","doll","dome","done","dons","doom","door","dope","dork","dorm","dose","dote","dots","dour","dove","down","doze","drab","drag","draw","dray","drew","drip","drop","drub","drug","drum","drys","dual","dubs","duck","duct","dude","duds","duel","dues","duet","duff","duke","dull","duly","dumb","dump","dune","dung","dunk","duos","dupe","dusk","dust","duty","dyed","dyes","each","earl","earn","ears","ease","east","easy","eats","eave","ebbs","echo","eddy","edge","edgy","edit","eels","eggs","egos","eked","ekes","elks","elms","else","emir","emit","ends","envy","epic","eras","ergo","ergs","errs","etch","even","ever","eves","evil","ewes","exam","exec","exes","exit","expo","eyed","eyes","face","fact","fade","fads","fail","fair","fake","fall","fame","fang","fans","fare","farm","fast","fate","fats","fawn","faze","fear","feat","feds","feed","feel","fees","feet","fell","felt","fend","fens","fern","fest","feud","fiat","fibs","figs","file","fill","film","find","fine","fink","fins","fire","firm","firs","fish","fist","fits","five","fizz","flab","flag","flak","flan","flap","flat","flaw","flay","flea","fled","flee","flew","flex","flip","flit","flog","flop","flow","flub","flue","flux","foal","foam","foes","fogs","foil","fold","folk","fond","font","food","fool","foot","ford","fore","fork","form","fort","foul","four","fowl","foxy","frat","fray","free","fret","frog","from","fuel","full","fume","fund","funk","furl","furs","fury","fuse","fuss","futz","fuzz","gabs","gads","gags","gain","gait","gala","gale","gall","gals","game","gamy","gang","gape","gaps","garb","gash","gasp","gate","gave","gawk","gaze","gear","geek","gees","geld","gels","gems","gene","gent","germ","gets","gift","gigs","gild","gill","gilt","gins","gird","girl","gist","give","glad","glee","glen","glib","glob","glow","glue","glum","glut","gnat","gnaw","gnus","goad","goal","goat","gobs","gods","goes","gold","golf","gone","gong","good","goof","gook","goon","gore","gory","gosh","gout","gown","grab","grad","gram","grew","grid","grim","grin","grip","grit","grog","grow","grub","guff","gulf","gull","gulp","gums","gunk","guns","guru","gush","gust","guts","guys","gyms","gyro","hack","haft","hags","hail","hair","hale","half","hall","halo","halt","hams","hand","hang","hard","hare","hark","harm","harp","hart","hash","hate","hats","haul","have","hawk","haws","hays","haze","hazy","head","heal","heap","hear","heat","heed","heel","heir","held","hell","helm","help","hemp","hems","hens","herb","herd","here","hero","hers","hews","hick","hide","high","hike","hill","hilt","hims","hind","hint","hips","hire","hiss","hits","hive","hoax","hobo","hock","hods","hoed","hoes","hogs","hold","hole","holy","home","hone","honk","hood","hoof","hook","hoop","hoot","hope","hops","horn","hose","host","hour","hove","howl","hows","hubs","hued","hues","huff","huge","hugs","hulk","hull","hump","hums","hung","hunk","hunt","hurl","hurt","hush","husk","huts","hymn","hype","hypo","ibex","iced","ices","icky","icon","idea","idle","idly","idol","iffy","ills","imps","inch","info","inks","inky","inns","into","ions","iota","iris","irks","iron","isle","itch","item","jabs","jack","jade","jags","jail","jamb","jams","jars","jaws","jays","jazz","jeep","jeer","jeez","jell","jerk","jest","jets","jibe","jibs","jigs","jilt","jinx","jive","jobs","jock","jogs","john","join","joke","jolt","josh","jots","jowl","joys","judo","jugs","jump","junk","jury","just","jute","juts","keel","keen","keep","kegs","kelp","kens","kept","keys","kick","kids","kill","kiln","kilo","kilt","kind","king","kink","kiss","kite","kith","kits","kiwi","knee","knew","knit","knob","knot","know","labs","lace","lack","lacy","lade","lads","lady","lags","laid","lain","lair","lake","lama","lamb","lame","lamp","land","lane","laps","lard","lark","lash","lass","last","late","lath","laud","lava","lawn","laws","lays","laze","lazy","lead","leaf","leak","lean","leap","leek","leer","lees","left","legs","lend","lens","lent","less","lest","lets","levy","lewd","liar","lice","lick","lids","lied","lien","lies","lieu","life","lift","like","lilt","lily","limb","lime","limo","limp","line","link","lint","lion","lips","lira","lire","lisp","list","lite","live","load","loaf","loam","loan","lobe","lobs","lock","loco","lode","loft","logo","logs","loin","loll","lone","long","look","loom","loon","loop","loot","lope","lops","lord","lore","lose","loss","lost","lots","loud","lout","love","lows","luck","lugs","lull","lump","lung","lure","lurk","lush","lust","lute","lynx","lyre","mace","made","mads","maid","mail","maim","main","make","male","mall","malt","mama","mane","mans","many","maps","mare","mark","mars","mart","mash","mask","mass","mast","mate","mats","maul","mayo","maze","meal","mean","meat","meek","meet","meld","melt","meme","memo","mend","menu","mere","mesa","mesh","mess","mete","mews","mice","mien","miff","mike","mild","mile","milk","mill","mime","mind","mine","mini","mink","mint","mire","miss","mist","mite","mitt","moan","moat","mobs","mock","mode","mole","moll","monk","mono","mood","moon","moor","moos","moot","mope","mops","more","morn","moss","most","mote","moth","move","mows","much","muck","muff","mugs","mule","mull","muse","mush","musk","muss","must","mute","mutt","myth","nabs","nags","nail","name","nape","naps","nary","navy","nays","near","neat","neck","need","neon","nerd","nest","nets","news","newt","next","nice","nick","nigh","nine","nips","nits","node","nods","none","nook","noon","nope","norm","nose","nosy","note","noun","nova","nude","nuke","null","numb","nuns","nuts","oafs","oaks","oars","oath","oats","obey","obit","oboe","odds","odes","offs","ogle","ogre","ohms","oils","oily","oink","okra","omen","omit","once","ones","only","onto","onus","onyx","oops","ooze","opal","open","opts","opus","oral","ores","orgy","ouch","ours","oust","outs","oval","oven","over","ovum","owed","owes","owls","owns","oxen","pace","pack","pact","pads","page","paid","pail","pain","pair","pale","pall","palm","pals","pane","pang","pans","pant","papa","pare","park","pars","part","pass","past","pate","path","pats","pave","pawn","paws","pays","peak","peal","pear","peas","peat","peck","peek","peel","peep","peer","pegs","pelt","pens","peon","peps","perk","perm","pert","pest","pets","pews","pica","pick","pied","pier","pies","pigs","pike","pile","pill","pine","ping","pink","pins","pint","pipe","pips","pith","pits","pity","plan","play","plea","plod","plop","plot","ploy","plug","plum","plus","pods","poem","poet","poke","poky","pole","poll","polo","pomp","pond","pony","pooh","pool","poor","pope","pops","pore","pork","port","pose","posh","post","posy","pots","pour","pout","pram","pray","prep","prey","prig","prim","prod","prof","prom","prop","pros","prow","pubs","puck","puff","puke","pull","pulp","puma","pump","punk","puns","punt","puny","pupa","pups","pure","purr","push","puss","puts","putt","pyre","quad","quay","quip","quit","quiz","race","rack","racy","raft","rage","rags","raid","rail","rain","rake","ramp","rams","rang","rank","rant","raps","rapt","rare","rash","rasp","rate","rats","rave","rays","raze","razz","read","real","ream","reap","rear","redo","reds","reed","reef","reek","reel","refs","rein","rely","rend","rent","reps","rest","revs","ribs","rice","rich","rick","ride","rids","rife","rift","rigs","rile","rill","rims","rind","ring","rink","riot","ripe","rips","rise","risk","rite","road","roam","roan","roar","robe","robs","rock","rode","rods","roes","roil","role","roll","romp","rood","roof","rook","room","root","rope","rose","rosy","rote","rots","rout","rove","rows","rubs","ruby","rude","rued","rues","ruff","rugs","ruin","rule","rump","rums","rune","rung","runs","runt","ruse","rush","rusk","rust","ruts","sack","sacs","safe","saga","sage","sags","said","sail","sake","sale","salt","same","sand","sane","sang","sank","sans","saps","sari","sash","sass","sate","save","saws","says","scab","scad","scam","scan","scar","scum","seal","seam","sear","seas","seat","sect","seed","seek","seem","seen","seep","seer","sees","self","sell","send","sent","sets","sewn","sews","shad","sham","shed","shim","shin","ship","shod","shoe","shoo","shop","shot","show","shun","shut","sick","sics","side","sift","sigh","sign","silk","sill","silo","silt","sine","sing","sink","sins","sips","sire","sirs","site","sits","size","skew","skid","skim","skin","skip","skis","skit","slab","slag","slam","slap","slat","slay","sled","slew","slid","slim","slip","slit","slob","slog","slop","slot","slow","slug","slum","slur","smog","smug","smut","snag","snap","snip","snit","snob","snot","snow","snub","snug","soak","soap","soar","sobs","sock","soda","sods","sofa","soft","soil","sold","sole","solo","some","song","sons","soon","soot","sops","sore","sort","soul","soup","sour","sown","sows","span","spar","spas","spat","spay","sped","spew","spin","spit","spot","spry","spud","spun","spur","stab","stag","star","stay","stem","step","stew","stir","stop","stow","stub","stud","stun","subs","such","suck","suds","sued","sues","suet","suit","sulk","sumo","sums","sung","sunk","suns","sure","surf","swab","swam","swan","swap","swat","sway","swig","swim","swum","sync","tabs","tack","taco","tact","tads","tags","tail","take","talc","tale","talk","tall","tame","tang","tank","tans","tape","taps","tarp","tars","tart","task","taut","taxi","teak","teal","team","tear","teas","teat","teed","teem","teen","tees","tell","temp","tend","tens","tent","term","test","text","than","that","thaw","thee","them","then","they","thin","this","thou","thru","thud","thug","thus","tick","tics","tide","tidy","tied","tier","ties","tiff","tile","till","tilt","time","tine","ting","tins","tint","tiny","tips","tire","toad","toed","toes","tofu","toga","togs","toil","told","toll","tomb","tome","tone","tong","tons","took","tool","toot","tops","tore","torn","tors","tort","toss","tote","tots","tour","tout","town","tows","toys","tram","trap","tray","tree","trek","trim","trio","trip","trod","trot","true","tuba","tube","tubs","tuck","tuft","tugs","tuna","tune","turd","turf","turn","tush","tusk","twee","twig","twin","twit","twos","tyke","type","typo","ugly","umps","undo","unit","unto","upon","urge","uric","urns","used","user","uses","vain","vamp","vane","vans","vary","vase","vast","vats","veal","veer","veil","vein","veld","vend","vent","verb","very","vest","veto","vets","vial","vibe","vice","vied","vies","view","vile","vine","viol","visa","vise","void","volt","vote","vows","wade","wadi","wads","waft","wage","wags","waif","wail","wait","wake","wale","walk","wall","wand","wane","want","ward","ware","warm","warn","warp","wars","wart","wary","wash","wasp","watt","wave","wavy","waxy","ways","weak","wean","wear","webs","weds","weed","week","weep","weld","well","welt","wend","went","wept","were","west","wets","wham","what","when","whet","whew","whim","whip","whit","whoa","whom","whys","wick","wide","wife","wigs","wild","wile","will","wilt","wily","wimp","wind","wine","wing","wink","wino","wins","wipe","wire","wiry","wise","wish","wisp","wist","with","wits","wive","woes","woke","woks","wolf","womb","wont","wood","woof","wool","woos","word","wore","work","worm","worn","wove","wows","wrap","wren","writ","wuss","yaks","yams","yank","yaps","yard","yarn","yawl","yawn","yeah","year","yeas","yell","yelp","yens","yeps","yeti","yews","yips","yoga","yoke","yolk","yore","your","yous","yowl","yuck","zany","zaps","zeal","zero","zest","zeta","zinc","zing","zips","zits","zone","zoom","zoos"];
+
+function InitialCap(word) {
+    return word.substr(0,1).toUpperCase() + word.substr(1)
+}
+
+function GetWords(wordCount, dict) 
+{
+    var out = ""
+    var dice;
+    
+    for (var ii = 0; ii < wordCount; ii++)
+    {
+        dice = GetDiceRolls(5);
+        
+        var word = dice[0] + dice[1]*6 + dice[2]*6*6 + dice[3]*6*6*6 + dice[4]*6*6*6*6;
+        
+        var maxVal = Math.floor(6*6*6*6*6 / dict.length) * dict.length;
+        word = word <= maxVal ? word % dict.length : word;
+        
+        if (word < dict.length) {
+           if (out === "") out = dict[word]
+           else if ((wordCount == 4 && ii == 2) || (wordCount == 5 && ii == 2) || (wordCount == 6 && ii == 3) ||
+                    (wordCount == 7 && ii == 3) || (wordCount == 8 && ii == 4) || (wordCount == 9 && (ii == 3 || ii == 5)) || 
+                    (wordCount == 10 && (ii == 3 || ii == 6)) || (wordCount == 11 && (ii == 4 || ii == 7)) ||
+                    (wordCount == 12 && (ii == 4 || ii == 8)) ||
+                    (wordCount > 12 && (ii % 7 === 0 || ii % 7 === 3) && ii > 0)
+                   )
+                    out = out + " - " + dict[word]
+           else out = out + " " + dict[word]
+        } else {
+           ii--; 
+        }
+    }
+    
+    return out
+}
+
+function GetBase32Digits(numDigits, runes)
+{
+    var out = ""
+    var val = 0
+    var dice;
+    
+    if (numDigits > 0) {
+       dice = GetDiceRolls(numDigits*5)
+       for (var ii = 0; ii < numDigits*5; ii += 5) {
+           val = dice[ii+0]*(1)+dice[ii+1]*(6)+dice[ii+2]*(6*6)+dice[ii+3]*(6*6*6)+dice[ii+4]*(6*6*6*6);
+           out = out + runes.substr(val%32,1)
+       }
+    }
+    
+    return out
+}
+
+function Refresh() {
+    var html = ""
+
+    var dict = hpdict2048;
+
+    // Missing G (6, 8), S (5), U (v), Y (4).  Watch for 0 and o, 2 and z
+    // Uppercase chosen to avoid ambiguity: B(6), F(t), H(n), L(1,I), Q(9), R(n)
+    // Uppercase chosen to distribute upper & lower evenly: CPVWX (all have similar shapes upper vs lower)
+    var base32runes = "0123456789aBCdeFHijkLmnoPQRtVWXz";
+    
+    ii = 5;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    ii = 7;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    ii = 9;
+    strength = Math.log(dict.length) / Math.log(2) * ii
+    strength = Math.floor(strength)
+    html = html + ii + ": " + (ii < 10 ? "&nbsp;" : "") + GetWords(ii, dict) + " (" +  strength + " bits)" + "<br />"
+
+    window.document.getElementById("mkrpc-content").innerHTML = html;
+
+    var sep = '-'
+
+    html = ""
+    ii = 12;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
+    ii = 16;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
+    ii = 20;
+    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits)";
+        window.document.getElementById("mkrpc-base32").innerHTML = html;
+}
+        </script>
+    </head>
+
+    <body>
+        <h2 class="title">mkrpc: Make Random Passcode</h2>
+        <h4><b><i class="header">Word-Based Passcode</i></b></h4>
+        <div id="mkrpc-content" class="contentdiv">(Please enable JavaScript)</div>
+        <p><b><i>How long?</i></b>
+        Use 5 words for a passcode used on a closed network,
+        7 words for one used out on the Internet, or
+        9 words for protecting an encrypted document or archive.
+        Use 5 or more words for a Wi-Fi passcode, depending on how publicly visible
+        the Wi-Fi network is. 
+        Use a couple words for a PIN, random email, or username.</p>
+        <p><b><i>To use:</i></b>
+        If needed to meet passcode security rules, uppercase the first letter and type the hyphen(s).</p>
+        <h4><b><i class="header">Base-32 Passcode</i></b></h4>
+        <div class="contentdiv">
+            <span id="mkrpc-base32">(Please enable JavaScript)</span><br />
+        </div>
+        <p>Use Base-32 for a passcode required to be 20 characters or less.
+        It's shorter, but harder to remember.</p>
+        <p><b><i>How long?</i></b>
+        Use 12 characters on a closed network, 16 on the internet, or 20 for an encrypted document or archive.</p> 
+        <p><b><i>To use:</i></b>
+        It may be typed in lowercase and without hyphens; it's shown using both upper- and lowercase characters to make it less ambiguous to write down, 
+        especially if the zero and lowercase Z are written with slashes.
+        Or type it in mixed case to meet passcode security rules if needed. The lowercase letters are all the vowels, plus the consonants in "doze mint joke".</p>
+        <p>Base-32 uses characters from this set: <span class="example">[0123456789aBCdeF,HijkLmnoPQR,t,VWX,z]</span>.</p>
+        <div class="footer"><p>&copy; 2022 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a>. Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2019.10.06, &copy; 2000-2019 Kevin Atkinson et al. Lock adapted from <a href="https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md">Mozilla's Emoji</a></div></p>
+        <script type="text/javascript">Refresh()</script>
+    </body>
+</html>
