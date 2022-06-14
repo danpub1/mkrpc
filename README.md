@@ -22,3 +22,10 @@ But simplicity won out over shortness.
 The base-32 generator uses an alphabet chosen to be written down.
 (My handwriting is not neat enough for base-64.)
 Write zero and Z (zed) with a slash and you shouldn't have to wonder what character is what.
+
+### Update
+[https://danpub1.github.io/mkrpc/mkrpc-air.html](https://danpub1.github.io/mkrpc/mkrpc-air.html)
+
+Simplicity may win out.  Can't convince myself that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
+
+This version has a 2048-word dictionary of 4 letter words.  Just use them
