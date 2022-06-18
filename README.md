@@ -2,7 +2,7 @@
 [https://danpub1.github.io/mkrpc/mkrpc-lite.html](https://danpub1.github.io/mkrpc/mkrpc-lite.html)
 
 This represents a number of years of trying various other solutions, and accepting these as a reasonable compromise.
-Every couple of a months, a forced password change and a bit more thinking about what works for me.
+Every couple of a months, a forced password change and a bit more thinking about what works.
 Not saying these choices are for everybody.
 All of these solutions are for passcodes which need to be typed occasionally and into places which can't be reached with a password manager.
 
@@ -26,6 +26,6 @@ Write zero and Z (zed) with a slash and you shouldn't have to wonder what charac
 ### Update
 [https://danpub1.github.io/mkrpc/mkrpc-air.html](https://danpub1.github.io/mkrpc/mkrpc-air.html)
 
-Simplicity may win out.  Can't convince myself that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
+Simplicity may win out.  Can't be convinced that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
 
 This version has a 2048-word dictionary of 4 letter words.  Just use them
