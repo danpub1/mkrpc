@@ -32,16 +32,18 @@ This version has a 2048-word dictionary of 4 letter words.  Just use them
 
 ## Base-32 Alphabet Rationale
 
-Base-32 alphabet is all the digits and all the letters except those in ***GUYS***, with
-the lowercase letters being those found in ***mad tick zone***.
+Base-32 alphabet is all 10 digits, 11 uppercase letters, and 11 lowercase letters - 
+so the distribution of uppercase, lowercase, and digit are all about the same.
+The 4 letters excluded are those in ***GUYS***, and
+the lowercase letters are those found in ***damp kit zone***.
 
 * 0 - Slash 0 to distinguish from o
 * 1 - ok to write as one vertical stroke
 * 7 - Do not slash 7 to avoid similarity with F
 * a - Prefer a because A and H are similar
-* B - Uppercase B because b is similar to 6
-* c - Either would be ok, upper and lower are similar
-* d - Lowercase d is preferred becauase D may be confused with 0
+* B - Uppercase B because b is similar to 6, but take care to write the vertical stroke clearly to avoid confusion with 8
+* C - Either would be ok, upper and lower are similar, choose upper to avoid similarity with a and e
+* d - Lowercase d is preferred becauase D may be confused with 0 or o.  Write the vertical stroke clearly to avoid confusion with a.
 * e - Lowercase e is preferred to distinguish from F
 * F - Uppercase F to distinguish from lowercase t
 * G is excluded because G is similar to 6 and g is similar to 8
@@ -53,7 +55,7 @@ the lowercase letters being those found in ***mad tick zone***.
 * m - Either would be ok, upper and lower are similar
 * n - N or n is ok - use opposite case of H
 * o - Lowercase o to distinguish from 0
-* P - Either would be ok, upper and lower are similar
+* p - Either would be ok, upper and lower are similar
 * Q - Uppercase Q to distinguish from 9
 * R - Avoid lowercase r because of similarity with n or h
 * Not S or s - similar to 5
