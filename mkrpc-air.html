@@ -109,7 +109,7 @@ function Refresh() {
     // Missing G (6, 8), S (5), U (v), Y (4).  Watch for 0 and o, 2 and z
     // Uppercase chosen to avoid ambiguity: B(6), F(t), H(n), L(1,I), Q(9), R(n)
     // Uppercase chosen to distribute upper & lower evenly: CPVWX (all have similar shapes upper vs lower)
-    var base32runes = "0123456789aBCdeFHijkLmnoPQRtVWXz";
+    var base32runes = "0123456789aBcdeFHiJkLmnoPQRtVWXz";
     
     ii = 5;
     strength = Math.log(dict.length) / Math.log(2) * ii
@@ -170,8 +170,8 @@ function Refresh() {
         Use 12 characters on a closed network, 16 on the internet, 20 for an encrypted document or archive, or 50 for any purpose with a password manager.</p> 
         <p><b><i>To use:</i></b>
         It may be typed in either case and without hyphens, or as shown to meet passcode security rules if needed.</p>
-        <p>Base-32 uses only the characters <span class="example">[0123456789aBCdeF,HijkLmnoPQR,t,VWX,z]</span>.  This minimizes ambiguity, especially if the zero and lowercase Z are written with slashes.  The lowercase letters spell "mint adze joke", a funny story about a pale green woodworking tool.  There's no "guys" though, those four letters are not used.</p>
-        <div class="footer"><p>&copy; 2022 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a>. Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2020.12.17, &copy; 2000-2020 Kevin Atkinson et al. Lock adapted from <a href="https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md">Mozilla's Emoji</a></div></p>
+        <p>Base-32 uses only the characters <span class="example">[0123456789aBcdeF,HiJkLmnoPQR,t,VWX,z]</span>.  This minimizes ambiguity, especially if the zero and lowercase Z are written with slashes.  The lowercase letters spell "mad tick zone", a place in the woods to avoid when hiking.  There's no "guys" though, those four letters are not used.</p>
+        <div class="footer"><p>&copy; 2026 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a>. Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2020.12.17, &copy; 2000-2020 Kevin Atkinson et al. Lock adapted from <a href="https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md">Mozilla's Emoji</a></div></p>
         <script type="text/javascript">Refresh()</script>
     </body>
 </html>
