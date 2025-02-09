@@ -49,10 +49,10 @@ hoping that it's a black bear and not a grizzly.
 * A - Prefer A because a and o are similar
 * B - Uppercase B because b is similar to 6, but take care to write the vertical stroke clearly to avoid confusion with 8
 * C - Either would be ok, upper and lower are similar, choose upper to avoid similarity with a and e
-* d - Lowercase d is preferred becauase D may be confused with 0 or o.  Write the vertical stroke clearly to avoid confusion with a.
+* d - Lowercase d is preferred becauase D may be confused with 0 or o.
 * e - Lowercase e is preferred to distinguish from F
 * F - Uppercase F to distinguish from lowercase t
-* G is excluded because G is similar to 6 and g is similar to 8
+* Not G or g, because G is similar to 6 and g is similar to 8
 * h - H or h is ok - use opposite case of N
 * i - i is preferred because I may be confused with 1
 * J - avoid j for similarity with i
@@ -67,7 +67,7 @@ hoping that it's a black bear and not a grizzly.
 * Not S or s - similar to 5
 * t - Lowercase t to distinguish from uppercase F
 * u - Either would be ok, upper and lower are similar
-* V - Not V or v, both are similar to U and u
+* Not V or v, both are similar to U and u
 * w - Either would be ok, upper and lower are similar
 * X - Either would be ok, upper and lower are similar
 * Not Y or y - similar to 4 or x
