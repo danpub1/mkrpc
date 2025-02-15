@@ -80,6 +80,11 @@ function GetWords(wordCount, dict)
            ii--; 
         }
     }
+
+    // doze with sky up
+    out = out.toLowerCase().replaceAll("a","A").replaceAll("b","B").replaceAll("c","C").replaceAll('f','F')
+        .replaceAll('g','G').replaceAll('j','J').replaceAll('l','L').replaceAll('m','M').replaceAll('n','N')
+        .replaceAll('q','Q').replaceAll('r','R').replaceAll('v','V').replaceAll('x','X');
     
     return out
 }

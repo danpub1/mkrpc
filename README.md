@@ -30,18 +30,21 @@ Simplicity may win out.  Can't be convinced that the CVC-based passcodes are use
 
 This version has a 2048-word dictionary of 4 letter words.  Just use them
 
-## Base-32 Alphabet Rationale
+### Update
+
+Trying mixed case for the word-based passcodes in [mkrpc-air](https://danpub1.github.io/mkrpc/mkrpc-air.html), safer to write down.
+
+## Base-32 / Base-36 Alphabet Rationale
+
+The base-36 alphabet includes all 10 digits and all the letters, 13 uppercase and 13 lowercase,
+so that the distribution of digits, uppercase, and lowercase are as similar as possible.
+The lowercase letters are those found in 'doze with sky up',
+which sounds like a suggestion to nap lying on your back.
 
 The base-32 alphabet is all 10 digits, 11 uppercase letters, and 11 lowercase letters - 
-so the distribution of uppercase, lowercase, and digits are all about the same.
-The 4 letters excluded are those in ***SVG-y***,
+so the distribution of digits, uppercase, and lowercase are all about the same.
+The 4 letters excluded are those in ***sVG-y***,
 which describes something with qualities similar to a Scalable Vector Graphics image. 
-The lowercase letters are those found in ***thud woke zip***, 
-which is what happens when a bear knocks your food out of the tree at night.
-***Thud*** as your food hits the ground.
-***Woke*** is what you did when you heard the thud.
-***Zip*** is you vacating your tent for the nearest tree,
-hoping that it's a black bear and not a grizzly.
 
 * 0 - Slash 0 to distinguish from o
 * 1 - ok to write as one vertical stroke
@@ -52,7 +55,7 @@ hoping that it's a black bear and not a grizzly.
 * d - Lowercase d is preferred becauase D may be confused with 0 or o.
 * e - Lowercase e is preferred to distinguish from F
 * F - Uppercase F to distinguish from lowercase t
-* Not G or g, because G is similar to 6 and g is similar to 8
+* G - be careful to write the 'chin' with straight lines to avoid similarity with 6. Not in base-32 because G is similar to 6 and g is similar to 8
 * h - H or h is ok - use opposite case of N
 * i - i is preferred because I may be confused with 1
 * J - avoid j for similarity with i
@@ -64,11 +67,11 @@ hoping that it's a black bear and not a grizzly.
 * p - Either would be ok, upper and lower are similar
 * Q - Uppercase Q to distinguish from 9
 * R - Avoid lowercase r because of similarity with n or h
-* Not S or s - similar to 5
+* s - Use lowercase to decrease similarity with 5.  Not in base-32 because of similarity with 5
 * t - Lowercase t to distinguish from uppercase F
 * u - Either would be ok, upper and lower are similar
-* Not V or v, both are similar to U and u
+* V - Uppercase to avoid similarity with u.  Not in base-32 because of similarity with U
 * w - Either would be ok, upper and lower are similar
 * X - Either would be ok, upper and lower are similar
-* Not Y or y - similar to 4 or x
+* y - Use lowercase to avoid similarity with 4 or X, not in base-32 because of similarity to 4 or X
 * z - lowercase z to distinguish from 2, Slash Z to distinguish from 2
