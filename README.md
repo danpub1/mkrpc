@@ -23,14 +23,14 @@ The base-32 generator uses an alphabet chosen to be written down.
 (My handwriting is not neat enough for base-64.)
 Write zero and Z (zed) with a slash and you shouldn't have to wonder what character is what.
 
-### Update
+### Update #1
 [https://danpub1.github.io/mkrpc/mkrpc-air.html](https://danpub1.github.io/mkrpc/mkrpc-air.html)
 
 Simplicity may win out.  Can't be convinced that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
 
 This version has a 2048-word dictionary of 4 letter words.  Just use them
 
-### Update
+### Update #2
 
 Trying mixed case for the word-based passcodes in [mkrpc-air](https://danpub1.github.io/mkrpc/mkrpc-air.html), safer to write down.
 
@@ -42,14 +42,14 @@ The lowercase letters are those found in 'doze with sky up',
 which sounds like a suggestion to nap lying on your back.
 
 The base-32 alphabet is all 10 digits, 11 uppercase letters, and 11 lowercase letters - 
-so the distribution of digits, uppercase, and lowercase are all about the same.
+so the distribution of digits, uppercase, and lowercase are also as similar as possible.
 The 4 letters excluded are those in ***sVG-y***,
-which describes something with qualities similar to a Scalable Vector Graphics image. 
+which perhaps describes something with qualities similar to a Scalable Vector Graphics image. 
 
 * 0 - Slash 0 to distinguish from o
 * 1 - ok to write as one vertical stroke
 * 7 - Do not slash 7 to avoid similarity with F
-* A - Prefer A because a and o are similar
+* A - Prefer A because single story a and o are similar. A and H should not be both uppercase.
 * B - Uppercase B because b is similar to 6, but take care to write the vertical stroke clearly to avoid confusion with 8
 * C - Either would be ok, upper and lower are similar, choose upper to avoid similarity with a and e
 * d - Lowercase d is preferred becauase D may be confused with 0 or o.
