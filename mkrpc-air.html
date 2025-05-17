@@ -141,9 +141,7 @@ function Refresh() {
     ii = 16;
     html = html + ii + ": &nbsp;" + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + sep + GetBase32Digits(4, base32runes) + " (" + ii*5 + " bits)<br />";
     ii = 20;
-    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits)<br />";
-    ii = 50;
-    html = html + ii + ": &nbsp;" + GetBase32Digits(51, base32runes) + " (" + ii*5 + " bits)";
+    html = html + ii + ": &nbsp;" + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + sep + GetBase32Digits(5, base32runes) + " (" + ii*5 + " bits) ";
     window.document.getElementById("mkrpc-base32").innerHTML = html;
 }
         </script>
@@ -172,10 +170,10 @@ function Refresh() {
             <span id="mkrpc-base32">(Please enable JavaScript)</span><br />
         </div>
         <p><b><i>How long?</i></b>
-        Use 12 characters on a closed network, 16 on the internet, 20 for an encrypted document or archive, or 50 for any purpose with a password manager.</p> 
+        Use 12 characters on a closed network, 16 on the internet, or 20 for an encrypted document or archive.</p> 
         <p><b><i>To use:</i></b>
-        It may be typed in either case and without hyphens, or as shown to meet passcode security rules if needed.</p>
-        <p>Base-32 uses only the characters <span class="example">[0123456789ABCdeF,hiJkLMNopQR,tu,wX,z]</span>.  This minimizes ambiguity, especially if the zero and lowercase Z are written with slashes.  The lowercase letters spell "<a href="https://github.com/danpub1/mkrpc?tab=readme-ov-file#base-32--base-36-alphabet-rationale">doze with sky up</a>".  The four letters svgy are not used.</p>
+        It may be typed in either case and without hyphens, or as shown if needed to comply with passcode security rules.</p>
+        <p>Base-32 uses only the characters <span class="example"><a href="https://github.com/danpub1/mkrpc?tab=readme-ov-file#base-32--base-36-alphabet-rationale">[0123456789ABCdeF,hiJkLMNopQR,tu,wX,z]</a></span>.  This minimizes ambiguity, especially if the zero and lowercase Z are written with slashes.  The lowercase letters spell <span class="example">doze with sky up</span>, but the letters <span class="example">sVGy</span> are not used.</p>
         <div class="footer"><p>&copy; 2025 danpub1, <a href="https://github.com/danpub1/mkrpc">repository on github</a>. Words selected from <a href="http://wordlist.aspell.net">SCOWL</a> v2020.12.17, &copy; 2000-2020 Kevin Atkinson et al. Lock adapted from <a href="https://github.com/mozilla/fxemoji/blob/gh-pages/LICENSE.md">Mozilla's Emoji</a></div></p>
         <script type="text/javascript">Refresh()</script>
     </body>
