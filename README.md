@@ -1,10 +1,34 @@
 # mkrpc - make random passcode
-[https://danpub1.github.io/mkrpc/mkrpc-lite.html](https://danpub1.github.io/mkrpc/mkrpc-lite.html)
 
-This represents a number of years of trying various other solutions, and accepting these as a reasonable compromise.
-Every couple of a months, a forced password change and a bit more thinking about what works.
+This represents a *number* of years of trying various other solutions, and accepting these as a reasonable compromise.
+Every couple of months, a forced password change and a bit more thinking about what works.
 Not saying these choices are for everybody.
-All of these solutions are for passcodes which need to be typed occasionally and into places which can't be reached with a password manager.
+All of these solutions are for passcodes which need to be typed occasionally and into places which can't be easily used with a password manager.
+
+#### Update #3
+
+[mkrpc-neon](https://danpub1.github.io/mkrpc/mkrpc-neon.html), lighter than air.
+
+Simplifying again, just use lowercase. Mixed case may reduce ambiguity, but adds complexity. 
+Whether words or base-32, only a few letters need to be written with extra care.
+
+Add wiktionary links for words.
+
+#### Update #2
+
+Trying mixed case for the word-based passcodes in [mkrpc-air](https://danpub1.github.io/mkrpc/mkrpc-air.html), safer to write down.
+
+#### Update #1
+
+[mkrpc-air](https://danpub1.github.io/mkrpc/mkrpc-air.html)
+
+Simplicity may win out.  Can't be convinced that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
+
+This version has a 2048-word dictionary of 4 letter words.  Just use them
+
+#### Initial Version
+
+[mkrpc-lite.html](https://danpub1.github.io/mkrpc/mkrpc-lite.html)
 
 The wordlist based passcode generator uses a relatively short list of words, only 2048.
 Longer lists end up having more obscure words, making them harder to remember.
@@ -23,18 +47,28 @@ The base-32 generator uses an alphabet chosen to be written down.
 (My handwriting is not neat enough for base-64.)
 Write zero and Z (zed) with a slash and you shouldn't have to wonder what character is what.
 
-### Update #1
-[https://danpub1.github.io/mkrpc/mkrpc-air.html](https://danpub1.github.io/mkrpc/mkrpc-air.html)
-
-Simplicity may win out.  Can't be convinced that the CVC-based passcodes are usefully pronounceable, and that the complexity of typing just the first three letters of words is worth it.
-
-This version has a 2048-word dictionary of 4 letter words.  Just use them
-
-### Update #2
-
-Trying mixed case for the word-based passcodes in [mkrpc-air](https://danpub1.github.io/mkrpc/mkrpc-air.html), safer to write down.
-
 ## Base-32 / Base-36 Alphabet Rationale
+
+#### Update #3
+
+The lowercase base-32 alphabet includes all the digits and letters except those in ***lnqs***.
+
+* 0 - Write with slash to distinguish from o
+* 1 - ok to write as one vertical stroke
+* a - take care to write the vertical stroke to distinguish from o
+* b - take care to write the vertical stroke to distinguish from 6
+* f - take are to write the top part to distinguish from t
+* g - take care to distinguish the shape from 8
+* h - take care to write the vertical stroke to distinguish from n
+* j - take care to write the lower part to distinguish from i
+* l - excluded from base-32 because of similarity with digit 1
+* n - excluded from base-32 because of similarity with h
+* q - excluded from base-32 because of similarity with digit 9
+* s - excluded from base-32 because of similarity with digit 5
+* u - take care to write the vertical stroke to distinguish from v
+* z - lowercase z to distinguish from 2, write with slash to distinguish from 2
+
+#### Initial Version
 
 The base-36 alphabet includes all 10 digits and all the letters, 13 uppercase and 13 lowercase,
 so that the distribution of digits, uppercase, and lowercase are as similar as possible.
